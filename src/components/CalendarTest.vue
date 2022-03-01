@@ -16,11 +16,11 @@ import { defineComponent, onMounted } from '@vue/composition-api'
 declare namespace gapi {}
 export default defineComponent({
   setup () {
-    const CLIENT_ID = '204376899645-d1gouo5rvmairvus5of19jha81m1lh3o.apps.googleusercontent.com'
-    const API_KEY = 'AIzaSyCEGWFUoSIhNf6H9CvQEIr_UdJPICinDmQ'
+    const CLIENT_ID = '307966429693-ojse5mu8mmndt0nh36p7c9t5jrdgj5j9.apps.googleusercontent.com'
+    const API_KEY = 'AIzaSyALCsR1R9piZ_8bHaCoeleM3VuW6mD4EB8'
     const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
     const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
-    const calendarID = '7kjcbngj63ie4or2lsa50kjfmg@group.calendar.google.com'
+    const calendarID = 'saruwatari.bloomark@gmail.com'
 
     function test () {
       console.log('すたーと')
@@ -55,17 +55,19 @@ export default defineComponent({
     }
     function handleAuthClick () {
       // const user = gapi.auth2.getAuthInstance()
-      console.log(user)
+      // console.log(user)
       gapi.auth2.getAuthInstance().signIn().catch(e => { console.error(e) })
     }
     function handleSignoutClick () {
       console.log('ろぐあーうと', gapi)
       gapi.auth2.getAuthInstance().signOut()
     }
-    function appendPre (message) {
-      const pre = document.getElementById('content')
+    function appendPre (message:any) {
+      const pre:HTMLElement|null = document.getElementById('content')
       const textContent = document.createTextNode(message + '\n')
-      pre.appendChild(textContent)
+      if (pre) {
+        pre.appendChild(textContent)
+      }
     }
     function listUpcomingEvents () {
       console.log('イベントとってくるでー')
@@ -96,7 +98,7 @@ export default defineComponent({
       })
     }
     onMounted(() => {
-      const script = document.createElement('script')
+      const script:any = document.createElement('script')
       script.src = 'https://apis.google.com/js/api.js'
       // script.setAttribute('src', 'https://apis.google.com/js/api.js')
       script.onreadystatechange = script.onload = function () {
